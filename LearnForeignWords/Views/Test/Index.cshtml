@@ -1,0 +1,71 @@
+﻿@model LearnForeignWords.Models.Collection
+
+<h2>@Model.Name</h2>
+<p style="color: red">@ViewBag.Message</p>
+<div class="container">
+	<div id="results">
+	<div class="row">
+		<div class="col-6">
+				<div class="cardshadow orange card mb-3">
+					<div class="card-body">
+						<h5 class="cardtext">Список слов</h5>
+						<p class="card-text"></p>
+							<a asp-action="GetWords" asp-controller="Test" asp-route-id="@Model.Id" asp-route-themeid="@Model.ThemeId" asp-route-local="@Model.local"   class="btn btn-info">Начать</a>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="cardshadow card cyan  mb-3" >
+					<div class="card-body">
+						<h5 class="cardtext">Карточки</h5>
+						<p class="card-text"></p>
+
+							<a asp-action="GetCards" asp-controller="Test" asp-route-id="@Model.Id" asp-route-themeid="@Model.ThemeId"  asp-route-local="@Model.local"  class="btn btn-info">Начать</a>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="cardshadow card  red mb-3 " style="">
+					<div class="card-body">
+						<h5 class="cardtext">Слово-Перевод</h5>
+						<p class="card-text"></p>
+
+							<a asp-action="Start" asp-controller="Test" asp-route-id="@Model.Id" asp-route-themeid="@Model.ThemeId" asp-route-type="1"  asp-route-local="@Model.local"  class="btn btn-info">Начать</a>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="cardshadow card blue mb-3" style="">
+					<div class="card-body">
+						<h5 class="cardtext">Перевод-Слово</h5>
+						<p class="card-text"></p>
+
+						<a asp-action="Start" asp-controller="Test" asp-route-id="@Model.Id" asp-route-themeid="@Model.ThemeId" asp-route-type="2"  asp-route-local="@Model.local"  class="btn btn-info">Начать</a>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="cardshadow card  orange mb-3" style="">
+					<div class="card-body">
+						<h5 class="cardtext">Введи слово</h5>
+						<p class="card-text"></p>
+
+							<a asp-action="Start" asp-controller="Test" asp-route-id="@Model.Id" asp-route-themeid="@Model.ThemeId" asp-route-type="3"  asp-route-local="@Model.local" class="btn btn-info">Начать</a>
+
+					</div>
+				</div>
+			</div>
+		
+	</div>
+	</div>
+</div>
+
+
+<div>
+   <a class="btn btn-info" onclick="javascript:history.back(); return false;">Назад</a>
+</div>
+

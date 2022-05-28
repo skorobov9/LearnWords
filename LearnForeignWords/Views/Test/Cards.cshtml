@@ -1,0 +1,73 @@
+﻿@model Collection
+@{
+	var prevDisabled = (int)ViewData["PageNumber"] - 1 < 0 ? "disabled" : "";
+	var nextDisabled = (int)ViewData["PageNumber"] + 1 >= Model.Words.Count ? "disabled" : "";
+}
+<div id="results">
+	<div class="row justify-content-center">
+		<div class="col-6">
+			<div>
+				<div class="box display:none " id="wordcard">
+					<div id="pic"></div>
+					<div class="card-body text-center">
+						<h5 class="cardtext" id="word">@Model.Words[(int)ViewData["PageNumber"]].Name</h5>
+						<p class="card-subtitle text-muted" id="tr"></p>
+						<p class="card-text" id="mean">@Model.Words[(int)ViewData["PageNumber"]].Meaning</p>
+
+						<div class="card-text" id="ex">
+						</div>
+					</div>
+
+				</div>
+				<button type="button" class="btn btn-primary @prevDisabled" id="@((int)ViewData["PageNumber"]-1)">Назад</button>
+				<button type="button" class="btn btn-primary @nextDisabled" id="@((int)ViewData["PageNumber"]+1)">Далее</button>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<a class="btn btn-info" onclick="javascript:history.back(); return false;">Назад</a>
+
+@section Scripts {
+<script type="text/javascript">
+	$(document).ready(function(){
+
+					var type;
+
+							$.get("https://dictionary.yandex.net/api/v1/dicservice.json/lookup",
+					{ key: "dict.1.1.20220520T231053Z.9a965177e5f3f440.e5644568156771861fef65873066cf0368825cb3",lang: "ru-@(Model.Language)", text: $('#mean').text(), ui: "en"  }, function(data) {
+								type = 	data.def[0].pos;
+								console.log(type);
+								for(var i=0;i<data.def.length;i++){
+										if(data.def[i].pos==type){
+									for(var j=0;j<data.def[i].tr[0].ex.length;j++){
+									$("#ex").append('<p class="card-text">'+data.def[i].tr[0].ex[j].tr[0].text+" - "+data.def[i].tr[0].ex[j].text+'</p>');
+
+									}
+
+									break;
+									}
+						}
+							
+
+							});
+	$.get("https://dictionary.yandex.net/api/v1/dicservice.json/lookup",
+					{ key: "dict.1.1.20220520T231053Z.9a965177e5f3f440.e5644568156771861fef65873066cf0368825cb3",lang: "@(Model.Language)-ru", text: $('#word').text(), ui: "en"  }, function(data) {
+
+									$("#tr").text('['+data.def[0].ts+']');
+								
+
+							});
+		
+
+
+			} );
+					$('button').on('click', function(){
+					var local = @Model.local;
+					var id = @Model.Id;
+						$('#results').load('/Test/GetCard?id='+id+'&local='+local+'&page='+$(this).prop('id'));
+
+						});
+</script>
+}

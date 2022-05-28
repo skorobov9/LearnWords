@@ -1,0 +1,18 @@
+﻿@model Test
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Результаты</h5>
+    <p class="card-text">@Model.CountRightAnswers/@Model.Questions.Count</p>
+    <p class="card-text">Вы ответили неправильно:</p>
+    @foreach(var w in Model.Questions)
+        {
+            if(!w.IsRightAnswer)
+            {
+                <p class="card-text">@w.Word.Name</p>
+            }
+        }
+        
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LearnForeignWords.Models.Theme>
+
+@{
+	ViewData["Title"] = "Index";
+}
+<h1>Темы</h1>
+<div class="container">
+	<div class="row">
+		@foreach (var item in Model)
+		{
+			<div class="col-md-4 col-sm-6">
+				<div class="cardshadow card ">
+						<img src=@item.Image class="card-img-top"/>
+					<div class="card-body">
+						<h5 class="cardtext">@item.Name</h5>
+						<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info ">Открыть</a>
+					</div>
+				</div>
+
+			</div>
+		}
+	</div>
+</div>

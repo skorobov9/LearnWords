@@ -1,0 +1,97 @@
+﻿@model Collection
+@{
+	bool IsAuthenticated;
+	if (User.Identity.IsAuthenticated)
+		IsAuthenticated = true;
+	else IsAuthenticated = false;
+	UserWords uw=null;
+}
+@foreach (var item in @Model.Words)
+{
+	    string ltype="btn btn-light";
+		string ftype="btn btn-light";
+	if (IsAuthenticated)
+	{
+		uw = item.UserWords.Where(w=> w.UserId == ViewBag.id).FirstOrDefault();
+		if (@item.UserWords.Find(x => x.UserId == ViewBag.id && x.WordId == item.Id) == null)
+		{
+			ltype = "btn btn-light";
+			ftype = "btn btn-light";
+		}
+		else { 
+			if(@item.UserWords.Find(x => x.UserId == ViewBag.id && x.WordId == item.Id).IsLearned)
+			ltype = "btn btn-primary";
+			if(@item.UserWords.Find(x => x.UserId == ViewBag.id && x.WordId == item.Id).IsFavorite)
+			ftype = "btn btn-primary";
+		}
+	}
+
+	<div class="card" style="width: 100%;">
+		<div class="card-body orange">
+			<h5 class="card-title">@item.Name</h5>
+			<h6 class="card-subtitle mb-2 text-muted">@item.Meaning</h6>
+			@if (IsAuthenticated)
+			{
+				@if (uw != null)
+				{
+					<div class=" text-muted card-subtitle" >
+					Правильных ответов:
+					<span style="color: lightgreen">@uw.RightCount </span><br>
+					Неправильных ответов:
+					<span style="color: red">@uw.ErrorCount</span>
+					</div>
+				}
+				else
+				{
+					<div class=" text-muted card-subtitle" >
+					Правильных ответов:
+					<span style="color: lightgreen">0 </span><br>
+					Неправильных ответов:
+					<span style="color: red">0</span>
+					</div>
+				}
+			}
+			<button type="button"  class="@ftype" id="@item.Id" data-type="f">Избранное</button>
+			<button type="button" class="@ltype" id="@item.Id" data-type="l">Изученное</button>
+		</div>
+	</div>
+}
+
+	<div>
+    <a class="btn btn-info" onclick="javascript:history.back(); return false;">Назад</a>
+</div>
+
+@section Scripts {
+<script>
+$('button').on('click', function(){
+
+		var IsAuthenticated = "@IsAuthenticated";
+
+		if(IsAuthenticated=="False"){
+		alert('Зарегистрируйтесь!');
+		return;
+		}
+				var answer = $(this);
+				$.post("/User/AddWordToUser", { id: $(this).prop("id"), type: $(this).data("type")})
+			.done(function (data) {
+				if(data.result){
+					if(answer.hasClass("btn-light")){
+						answer.removeClass("btn-light");
+					answer.addClass("btn-primary");
+					}
+					else{
+						answer.removeClass("btn-primary");
+					answer.addClass("btn btn-light");
+					}
+				}
+				else{
+					
+				}
+
+				console.log(data);
+
+			});
+			});
+			
+</script>
+}

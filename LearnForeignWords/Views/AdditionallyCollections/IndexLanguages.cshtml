@@ -1,0 +1,46 @@
+﻿@model LearnForeignWords.Models.Collection
+<h1>Дополнительные коллекции</h1>
+
+<div class="container">
+	<div id="results">
+	<div class="row">
+		
+			<div class="col-md-4 col-sm-6">
+				<div class="cardshadow card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Английский</h5>
+							<a asp-action="IndexAdditionally" asp-controller="Test" asp-route-id="@Model.Id" asp-route-lang="en" class="btn btn-info" >Открыть</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="cardshadow card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Французский</h5>
+							<a asp-action="IndexAdditionally" asp-controller="Test" asp-route-id="@Model.Id" asp-route-lang="fr"  class="btn btn-info" >Открыть</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="cardshadow card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Немецкий</h5>
+							<a asp-action="IndexAdditionally" asp-controller="Test" asp-route-id="@Model.Id" asp-route-lang="de" class="btn btn-info" >Открыть</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="cardshadow card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Итальянский</h5>
+							<a asp-action="IndexAdditionally" asp-controller="Test" asp-route-id="@Model.Id" asp-route-lang="it"  class="btn btn-info" >Открыть</a>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

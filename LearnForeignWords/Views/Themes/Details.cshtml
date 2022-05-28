@@ -1,0 +1,40 @@
+﻿@model LearnForeignWords.Models.Theme
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>@Model.Name</h1>
+
+<div class="container">
+	<div id="results">
+	<div class="row">
+		@foreach (var item in Model.Collections)
+		{
+			<div class="col-md-4 col-sm-6">
+				<div class="card cardshadow  mb-3" style="height: 14rem;">
+					<div class="card-body">
+						<h5 class="cardtext">@item.Name</h5>
+						<p class="card-text">@item.Words.Count слов</p>
+
+						<a asp-action="Index" asp-controller="Test" asp-route-id="@item.Id" asp-route-themeid="@Model.Id"  class="btn btn-info" style="position: absolute;
+bottom: 13px;">Открыть</a>
+				</div>
+			</div>
+			</div>
+		}
+		<div class="col-md-4 col-sm-6">
+				<div class="card cardshadow mb-3" style="height: 14rem;">
+					<div class="card-body">
+						<h5 class="cardtext">Все слова</h5>
+						<p class="card-text">@Model.AllWords().Count слов</p>
+
+						<a asp-action="IndexAll" asp-controller="Test" asp-route-id="@Model.Id" class="btn btn-info" style="position: absolute;
+bottom: 13px;">Открыть</a>
+				</div>
+					
+				</div>
+			</div>
+	
+</div>
+</div>
+</div>

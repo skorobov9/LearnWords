@@ -1,0 +1,55 @@
+﻿@model Question
+
+	<div class="progress">
+		<div class="progress-bar" role="progressbar" style="width: @(ViewBag.Number*10)%;" aria-valuenow="@(ViewBag.Number*10)" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<div class="text-center" id="answers">
+		<div class="box orange w-50 h mx-auto" >
+	
+			<div class="card-body">
+				<h5 class="card-title">@Model.Word.Meaning</h5>
+
+			</div>
+		</div>
+    <input type="text" class="form-control w-50 h mx-auto" id="answer" aria-describedby="emailHelp">
+	<div id="val"></div>
+	</div>
+	<div class="text-center">
+	<button type="button" class="btn btn-info"  id="check">Далее</button>
+	<button type="button" class="btn btn-info" hidden id="next">Далее</button>
+	<div class="box red card-subtitle" hidden id="rightAnswer"></div>
+</div>
+
+
+<script>
+			$('#check').on('click', function(){
+				var answer = $('#answer').val();
+				if(answer=="")
+				{
+					$('#val').text("Пустое поле");
+					return;
+				}
+				$.post("/Test/Answer", { answer: answer})
+			.done(function (data) {
+				$('#check').hide();
+				if(data.result){
+					$('#answer').addClass("border border-success");
+				}
+				else{
+					$('#answer').addClass("border border-danger");
+						$("#rightAnswer").text("Вы ответили неправильно. Правильный ответ:"+data.rightAnswer);
+						$('#rightAnswer').removeAttr('hidden');
+				}
+
+				console.log(data);
+					$('#next').removeAttr('hidden');
+
+			});
+				});
+				$('#next').on('click',function(){
+					$.get("/Test/GetQuestion", function(data) {
+						$("#result_text").html(data);
+				});
+
+				});
+</script>

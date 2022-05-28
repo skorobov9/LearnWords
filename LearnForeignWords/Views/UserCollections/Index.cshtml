@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LearnForeignWords.Models.Collection>
+
+@{
+	ViewData["Title"] = "Details";
+}
+<h1>Пользовательские коллекции</h1>
+
+<div class="container">
+	<div id="results">
+		<div class="row">
+			@foreach (var item in Model)
+			{
+				<div class="col-md-4 col-sm-6">
+					<div class="cardshadow card ">
+						<div class="card-body">
+							<h5 class="card-title">@item.Name</h5>
+							<h5 class="card-text">@item.Words.Count слов</h5>
+							@switch (@item.Language)
+							{
+								case "en":
+									<h5 class="card-text">Английский</h5>
+									break;
+								case "fr":
+									<h5 class="card-text">Французский</h5>
+									break;
+								case "de":
+									<h5 class="card-text">Немецкий</h5>
+									break;
+								case "it":
+									<h5 class="card-text">Итальянский</h5>
+									break;
+							}
+							<p>
+								<a asp-action="Index" asp-controller="Test" asp-route-id="@item.Id" asp-route-local="3" class="btn btn-info" >Открыть</a>
+							</p>
+							<p>
+
+								<a asp-action="Edit" asp-controller="UserCollections" asp-route-id="@item.Id" class="btn btn-info" >Изменить</a>
+							</p>
+							<p>
+
+								<a asp-action="Delete" asp-controller="UserCollections" asp-route-id="@item.Id"  class="btn btn-info" >Удалить</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+	<p>
+		<a asp-action="Create" asp-controller="UserCollections" class="btn btn-info">Добавить коллецию</a>
+	</p>
+
+</div>
+

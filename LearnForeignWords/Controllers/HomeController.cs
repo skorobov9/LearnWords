@@ -1,5 +1,7 @@
-﻿using LearnForeignWords.Models;
+﻿using LearnForeignWords.Data;
+using LearnForeignWords.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,17 @@ namespace LearnForeignWords.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		private readonly WordTestContext _context;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(WordTestContext context, ILogger<HomeController> logger)
 		{
+			_context = context;
 			_logger = logger;
 		}
 
 		public IActionResult Index()
 		{
-			return View();
+			return RedirectToAction("Index","Themes");
 		}
 
 		public IActionResult Privacy()

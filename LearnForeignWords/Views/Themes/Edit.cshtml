@@ -1,0 +1,97 @@
+﻿@model LearnForeignWords.Models.Collection
+
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Theme</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="Id" />
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+<div id="findword">
+	<div class="mb-3">
+		<input type="text" class="form-control" id="word" aria-describedby="emailHelp">
+		<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+<div class="card" style="width: 18rem; display:none" id="wordcard">
+	<div class="card-body">
+		<h5 class="card-title" id="inword"></h5>
+		<h6 class="card-subtitle mb-2 text-muted" id="mean"></h6>
+		<p class="card-text"></p>
+		<form method="post" asp-action="Edit" enctype="multipart/form-data">
+			<div class="form-group">
+				<input class="form-control" type="hidden" name="word" id="fword" >
+				<input class="form-control" type="hidden" name="mean" id="fmean" >
+				<input class="form-control" type="text" name="id" value="@Model.Id" hidden>
+				<label>Загрузить изображение</label>
+				<input type="file" accept=".png, .jpg, .jpeg" name="uploadedFile" class="form-control" id="imgfile" />
+			</div>
+			<input type="submit" class="btn btn-primary" value="Добавить слово">
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+<script>
+	$('#findword').on('click','button',function(event) {
+
+	$.get("https://dictionary.yandex.net/api/v1/dicservice.json/lookup",
+	{ key: "dict.1.1.20220520T231053Z.9a965177e5f3f440.e5644568156771861fef65873066cf0368825cb3",lang: "ru-en", text: $('#word').val(), ui: "en"}, function(data) {
+		if(data.def.length==0)
+		$("#wordcard").hide();
+		else{
+			$("#wordcard").show();
+			        $("#fmean").val(data.def[0].text);
+					$("#fword").val(data.def[0].tr[0].text);
+					$("#inword").text(data.def[0].text);
+					$("#mean").text(data.def[0].tr[0].text);
+
+
+		}
+
+
+			});
+	});
+
+	$('#wordcard').on('click', 'button', function(){
+				var elemet = $(this);
+				var id = @Model.Id;
+				$.post("/Themes/Edit/@(Model.Id)", { id: id, word: $("#inword").text(), mean: $("#mean").text(), uploadedFile: $('#imgfile').val() })
+			.done(function (data) {
+				if(data.result){
+					elemet.addClass("list-group-item-success")
+				}
+				else{
+					elemet.addClass("list-group-item-danger")
+				}
+
+				console.log(data);
+
+			});
+
+		});
+
+</script>
+}
+

@@ -1,0 +1,27 @@
+﻿@model LearnForeignWords.ViewModels.RegisterViewModel
+<h2 class="text-center">Регистрация нового пользователя</h2>
+<div class="mx-auto box orange col-md-6">
+<form method="post" asp-controller="User" asp-action="Register">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="col-8 mx-auto">
+        <label asp-for="Email" class="form-label"></label><br />
+        <input asp-for="Email" class="input" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="col-8 mx-auto">
+        <label asp-for="Password" class="form-label"></label><br />
+        <input asp-for="Password" class="input" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="col-8 mx-auto">
+        <label asp-for="PasswordConfirm" class="form-label"></label><br />
+        <input asp-for="PasswordConfirm"  class="input"/>
+        <span asp-validation-for="PasswordConfirm"></span>
+    </div>
+    <p>
+    <div class="text-center" >
+        <input type="submit" class="btn btn-info " value="Регистрация" />
+    </div>
+    </p>
+</form>
+</div>

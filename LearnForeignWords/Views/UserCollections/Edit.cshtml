@@ -1,0 +1,72 @@
+﻿@model LearnForeignWords.Models.Collection
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Добавить слово</h1>
+
+<h4>Collection</h4>
+<h5>@Model.Name</h5>
+<p style="color:red">@ViewBag.Message</p>
+<div id="findword">
+	<div class="mb-3">
+		<input type="text" class="input" id="word" aria-describedby="emailHelp">
+		<div id="emailHelp" class="form-text">Введите слово на русском для поиска</div>
+	</div>
+	<button type="submit" class="btn btn-info ">Найти слово</button>
+</div>
+<div class="card" style="width: 18rem; display:none" id="wordcard">
+	<div class="card-body">
+		<h5 class="card-title" id="inword"></h5>
+		<h6 class="card-subtitle mb-2 text-muted" id="mean"></h6>
+		<p class="card-text"></p>
+		<form method="post" asp-action="Edit" enctype="multipart/form-data">
+			<div class="form-group">
+				<input class="form-control" type="hidden" name="word" id="fword" >
+				<input class="form-control" type="hidden" name="mean" id="fmean" >
+				<input class="form-control" type="text" name="id" value="@Model.Id" hidden>	
+			</div>
+			<input type="submit" class="btn btn-info " value="Добавить слово">
+		</form>
+	</div>
+</div>
+<div>
+	<p>
+@foreach (var item in @Model.Words)
+{
+
+	<div class="card" style="width: 100%;">
+		<div class="card-body orange">
+			<h5 class="card-title">@item.Name</h5>
+			<h6 class="card-subtitle mb-2 text-muted">@item.Meaning</h6>
+		</div>
+	</div>
+}
+</p>
+</div>
+
+
+@section Scripts {
+<script>
+	$('#findword').on('click','button',function(event) {
+
+	$.get("https://dictionary.yandex.net/api/v1/dicservice.json/lookup",
+	{ key: "dict.1.1.20220520T231053Z.9a965177e5f3f440.e5644568156771861fef65873066cf0368825cb3",lang: "ru-@(Model.Language)", text: $('#word').val(), ui: "en"}, function(data) {
+		if(data.def.length==0)
+		$("#wordcard").hide();
+		else{
+			$("#wordcard").show();
+			        $("#fmean").val(data.def[0].text);
+					$("#fword").val(data.def[0].tr[0].text);
+					$("#inword").text(data.def[0].text);
+					$("#mean").text(data.def[0].tr[0].text);
+
+
+		}
+
+
+			});
+	});
+</script>
+}

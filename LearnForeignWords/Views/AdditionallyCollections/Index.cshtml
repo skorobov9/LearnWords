@@ -1,0 +1,30 @@
+﻿@model IEnumerable<LearnForeignWords.Models.Collection>
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Дополнительные коллекции</h1>
+
+<div class="container">
+	<div id="results">
+	<div class="row">
+		@foreach (var item in Model)
+		{
+			<div class="col-md-4 col-sm-6">
+				<div class="cardshadow card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">@item.Name</h5>
+						<p class="card-text">@item.Words.Count слов</p>
+
+							<a asp-action="IndexLanguages" asp-controller="AdditionallyCollections" asp-route-id="@item.Id"  class="btn btn-info">Открыть</a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
