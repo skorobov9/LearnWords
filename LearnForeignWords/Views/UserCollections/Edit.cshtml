@@ -26,6 +26,8 @@
 				<input class="form-control" type="hidden" name="word" id="fword" >
 				<input class="form-control" type="hidden" name="mean" id="fmean" >
 				<input class="form-control" type="text" name="id" value="@Model.Id" hidden>	
+				<label>Загрузить изображение</label>
+				<input type="file" accept=".png, .jpg, .jpeg" name="uploadedFile" class="form-control" id="imgfile" />
 			</div>
 			<input type="submit" class="btn btn-info " value="Добавить слово">
 		</form>

@@ -8,7 +8,10 @@
 	<div class="col-6" id="wordcard">
 		<div>
 			<div class="box" >
-				<div id="pic"></div>
+				@if(Model.Words[(int)ViewData["PageNumber"]].Image!=null){
+						<img src="@Model.Words[(int)ViewData["PageNumber"]].Image" class="card-img-top" height="300">
+					}
+					
 				<div class="card-body display:none text-center">
 					<h5 class="cardtext" id="word">@Model.Words[(int)ViewData["PageNumber"]].Name</h5>
 					<p class="card-subtitle text-muted" id="tr"></p>

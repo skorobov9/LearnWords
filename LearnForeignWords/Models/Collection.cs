@@ -7,7 +7,10 @@ namespace LearnForeignWords.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+
+		[Column("UserId")]
 		public string OwnerId { get; set; }
+
 		public int? ThemeId { get; set; }
 
 		public string Language { get; set; } = "en";
@@ -15,7 +18,9 @@ namespace LearnForeignWords.Models
 		[NotMapped]
 		public int local { get; set; }
 		
-		public Theme Theme { get; set; }	
+		public Theme Theme { get; set; }
+
+		public User User { get; set; }
 		public List<Word> Words { get; set; } = new();
 
 	}

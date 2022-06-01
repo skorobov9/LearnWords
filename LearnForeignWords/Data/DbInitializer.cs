@@ -9,8 +9,8 @@ namespace LearnForeignWords.Data
         public static void Initialize(WordTestContext context)
         {
 
-			//context.Database.EnsureDeleted();
-			context.Database.EnsureCreated();
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
 			// Look for any students.
 			if (context.Collections.Any())

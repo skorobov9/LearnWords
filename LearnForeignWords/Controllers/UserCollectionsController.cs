@@ -56,7 +56,7 @@ namespace LearnForeignWords.Controllers
             }
             var col = _context.Collections.AddAsync(new Collection() { OwnerId = user.Id, Name = name, Language = lang }).Result;
             await _context.SaveChangesAsync();
-            return View("Edit",col.Entity);
+            return RedirectToAction("Edit",new { id=col.Entity.Id});
         }
         [HttpPost]
         public async Task<IActionResult> Edit(int id, string word, string mean, IFormFile uploadedFile)
@@ -71,8 +71,7 @@ namespace LearnForeignWords.Controllers
                 ViewBag.Message = "Такое слово уже есть в коллекции";
                 return View("Edit", collection);
             }
-            _context.Words.Add(new Word { Collection=collection, Meaning = mean, Name = word});
-            await _context.SaveChangesAsync();
+            string path=null;
             if (uploadedFile != null)
             {
                 if (!Directory.Exists(_appEnvironment.WebRootPath + "/images/" + $"/{collection.Id}/"))
@@ -81,16 +80,17 @@ namespace LearnForeignWords.Controllers
                 }
                 FileInfo fileInfo = new FileInfo(uploadedFile.FileName);
                 // путь к папке Files
-                string path = "/images/" + $"{collection.Id}/" + word + fileInfo.Extension;
-                await _context.Words.AddAsync(new Word() { Collection = collection,  Name = word, Meaning = mean });
-                await _context.SaveChangesAsync();
+                path = "/images/" + $"{collection.Id}/" + word + fileInfo.Extension;
                 // сохраняем файл в папку Files в каталоге wwwroot
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
 
-            }
+            }  
+            _context.Words.Add(new Word { Collection=collection, Meaning = mean, Name = word, Image=path});
+            await _context.SaveChangesAsync();
+
             return View("Edit", collection);
 
         }

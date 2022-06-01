@@ -4,6 +4,6 @@ namespace LearnForeignWords.Models
 {
     public class User:IdentityUser
     {
-
+        
     }
 }
