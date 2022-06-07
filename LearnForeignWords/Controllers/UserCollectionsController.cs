@@ -29,7 +29,7 @@ namespace LearnForeignWords.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
-                return RedirectToAction("Login", "User", new { message = "Need to login!" });
+                return RedirectToAction("Login", "User", new { message = "Для доступа к разделу нужно войти/зарегистрироваться!" });
             }
             var collections = await _context.Collections.Include(c=> c.Words).Where(c => c.OwnerId == user.Id).ToListAsync();
             return View(collections);
@@ -41,7 +41,7 @@ namespace LearnForeignWords.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
-                return RedirectToAction("Login", "User", new { message = "Need to login!" });
+                return RedirectToAction("Login", "User", new { message = "Для доступа к разделу нужно войти/зарегистрироваться!" });
             }
             return View();
         }
@@ -52,7 +52,7 @@ namespace LearnForeignWords.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
-                return RedirectToAction("Login", "User", new { message = "Need to login!" });
+                return RedirectToAction("Login", "User", new { message = "Для доступа к разделу нужно войти/зарегистрироваться!" });
             }
             var col = _context.Collections.AddAsync(new Collection() { OwnerId = user.Id, Name = name, Language = lang }).Result;
             await _context.SaveChangesAsync();
@@ -99,7 +99,7 @@ namespace LearnForeignWords.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
-                return RedirectToAction("Login", "User", new { message = "Need to login!" });
+                return RedirectToAction("Login", "User", new { message = "Для доступа к разделу нужно войти/зарегистрироваться!" });
             }
             var collection = await _context.Collections.Include(c => c.Words).Where(c => c.Id == id).FirstOrDefaultAsync();
             if (collection == null)
@@ -114,7 +114,7 @@ namespace LearnForeignWords.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
-                return RedirectToAction("Login", "User", new { message = "Need to login!" });
+                return RedirectToAction("Login", "User", new { message = "Для доступа к разделу нужно войти/зарегистрироваться!" });
             }
             var collection = await _context.Collections.Include(c => c.Words).Where(c => c.Id == id).FirstOrDefaultAsync();
             if (collection == null)

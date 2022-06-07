@@ -12,11 +12,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using LearnForeignWords.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace LearnForeignWords
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,12 +38,20 @@ namespace LearnForeignWords
 
             services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<WordTestContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddJsonOptions(o => {
+                o.JsonSerializerOptions.ReferenceHandler  = ReferenceHandler.Preserve;
+            }); ;
+            services.AddSignalR(e => {
+                e.MaximumReceiveMessageSize = null;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -138,7 +150,11 @@ defaults: new { controller = "Test", action = "Start", local = "2" });
       endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHub<GameHub>("/testgame");
             });
+
+
 
         }
     }

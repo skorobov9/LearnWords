@@ -30,6 +30,9 @@
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="UserCollections" asp-action="Index">Мои наборы</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="Index">Соревнование</a>
+						</li>
 					</ul>
 					@if (User.Identity.IsAuthenticated)
 					{
@@ -71,10 +74,8 @@
 	<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/define.js" asp-append-version="true"></script>
-	 <script src="~/js/index.js" asp-append-version="true"></script>
-	  <script src="~/js/test.js" asp-append-version="true"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
 </body>

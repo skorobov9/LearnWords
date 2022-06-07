@@ -126,6 +126,7 @@ namespace LearnForeignWords.Controllers
             {
                 return NotFound();
             }
+           
             Test test = new Test() { Collection = collection, TestType = (TestType)type, User = user };
             test.CreateTest();
             if (test.Questions.Count < 10)
@@ -136,6 +137,9 @@ namespace LearnForeignWords.Controllers
             HttpContext.Session.Set<Test>("Test", test);
             return View("Test");
         }
+
+       
+
 
         [HttpPost]
         public async Task<ActionResult> Answer(string answer)

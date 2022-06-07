@@ -4,15 +4,18 @@
   <div class="card-body">
     <h5 class="card-title">Результаты</h5>
     <p class="card-text">@Model.CountRightAnswers/@Model.Questions.Count</p>
-    <p class="card-text">Вы ответили неправильно:</p>
-    @foreach(var w in Model.Questions)
+    <p class="card-text">Вы ответили :</p>
+    @foreach(var w in Model.GetAnswers())
         {
-            if(!w.IsRightAnswer)
+            if (w.IsRightAnswer)
             {
-                <p class="card-text">@w.Word.Name</p>
+                <p class="card-text text-success">@w.UserAnswer </p>
+            }
+            else
+            {
+                <p class="card-text text-danger">@w.UserAnswer </p>
             }
         }
         
-    <a href="#" class="card-link">Another link</a>
   </div>
 </div>

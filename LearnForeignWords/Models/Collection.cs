@@ -20,7 +20,6 @@ namespace LearnForeignWords.Models
 		
 		public Theme Theme { get; set; }
 
-		public User User { get; set; }
 		public List<Word> Words { get; set; } = new();
 
 	}

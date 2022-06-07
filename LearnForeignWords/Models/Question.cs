@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LearnForeignWords.Models
 {
-    public class Question
+    public class Question: ICloneable
     {
         public Word Word { get; set; }
 
@@ -10,6 +11,10 @@ namespace LearnForeignWords.Models
 
         public bool IsRightAnswer { get; set; }
 
-
+        public string UserAnswer { get; set; }
+        public object Clone()
+        {
+            return new Question() { Word = Word, Answers = Answers };
+        }
     }
 }
