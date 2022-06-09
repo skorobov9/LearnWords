@@ -9,17 +9,17 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
+		<nav class="navbar navbar-expand-md  navbar-light  border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
 			<div class="container">
 				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Words</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Информация</a>
+				<div class="navbar-collapse collapse " id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Информация    <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Themes" asp-action="Index">Темы</a>
@@ -51,9 +51,6 @@
 							<a class="btn btn-info" asp-controller="User" asp-action="Register">Регистрация</a>
 						</span>
 					}
-
-
-
 				</div>
 			</div>
 		</nav>

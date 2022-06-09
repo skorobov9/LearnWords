@@ -1,245 +1,279 @@
 ﻿@using LearnForeignWords.Models
 @model User
 <form class="form-horizontal">
-    <div id="divFindOpponentPlayer">
-        <fieldset>
-            <legend>Найти игрока!</legend>
-            <div class="form-group">
-                <input type="button" class="btn btn-primary" id="btnFindOpponentPlayer" value="Найти игрока" />
-            </div>
-        </fieldset>
-    </div>
-    <div id="divFindingOpponentPlayer">
-        <fieldset>
-            <legend>Почти готово</legend>
-            <div class="form-group">
-                Поиск оппонента для соревнования. Подождите.
-            </div>
-        </fieldset>
-    </div>
-    <div id="divGameInformation" class="form-group"> </div>
-        <div class="form-group" id="divGameInfo">
-
-        </div>
-        <div class="form-group" id="divInfo">
-            <div id="gameresult"></div>
-            	<div class="row">
-                    <div class="col-6">
-		<div class=" box orange">
-            <div class="card-body">
-    <h5 class="card-title">Ваши Результаты</h5>
-  
-    <p class="card-text">Вы ответили:</p>
-      <div class="card-text" id="myanswers"></div>
-        
-
-  </div></div>
-  </div>
-   <div class="col-6">
-  <div class=" box orange">
-            <div class="card-body">
-    <h5 class="card-title">Результаты соперника</h5>
-   
-    <p class="card-text" >Соперник ответил:</p>
-     <div class="card-text" id="oppanswers"></div>
-        
-
-  </div>
-  </div>
-   </div>
-        </div>
-    </div>
-    <div id="divGame" style="clear:both">
-        	<div class="text-center" id="answers">
-                <p id="numberquestion"></p>
-                <p id="timer"></p>
-		<div class="box orange w-50 h mx-auto" style="height: 120px;">
-			<div class="card-body">
-				<h5 class="card-title" id="word"></h5>
-
+	<div id="divCreateGame">
+		<fieldset>
+			<legend>Создать игру</legend>
+			<div class="form-group">
+				<select   class="form-control" asp-items="@ViewBag.Select">
+					<option value="0">Все слова</option>
+				</select>
+				<input type="button" class="btn btn-primary" id="btnCreateGame" value="Создать игру" />
 			</div>
-		</div>
-		<div class="row">
-
-				<div class="col-6">
-					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 ">
-				<div class="cardshadow card  orange mb-3" style="">
-					<div class="card-body">
-						<h5 class="cardtext" id="answ1"></h5>
-						
-
-					</div>
-				</div></button>
-			</div>
-            <div class="col-6">
-					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 " >
-				<div class="cardshadow card  orange mb-3" style="">
-					<div class="card-body">
-						<h5 class="cardtext" id="answ2"></h5>
-
-
-					</div>
-				</div></button>
-			</div>
-            <div class="col-6">
-					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 " >
-				<div class="cardshadow card  orange mb-3" style="">
-					<div class="card-body">
-						<h5 class="cardtext" id="answ3"></h5>
-						
-
-
-					</div>
-				</div></button>
-			</div>
-            <div class="col-6">
-					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 ">
-				<div class="cardshadow card  orange mb-3" style="">
-					<div class="card-body">
-						<h5 class="cardtext" id="answ4"></h5>
-						
-
-
-					</div>
-				</div></button>
-			</div>
-		
-		</div>
-			<div class="box orange card-subtitle " hidden id="rightAnswer"></div>
+		</fieldset>
 	</div>
-    </div>
+	<div id="divFindOpponentPlayer">
+		<fieldset>
+			<legend>Найти игрока!</legend>
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" id="btnFindOpponentPlayer" value="Найти игрока" />
+			</div>
+		</fieldset>
+	</div>
+	<div id="divFindingOpponentPlayer">
+		<fieldset>
+			<legend>Почти готово</legend>
+			<div class="form-group">
+				Поиск оппонента для соревнования. Подождите.
+			</div>
+		</fieldset>
+	</div>
+	<div id="divGameInformation" class="form-group"> </div>
+	<div class="form-group" id="divGameInfo">
+	</div>
+	<div class="form-group" id="divInfo">
+		<div id="gameresult"></div>
+		<div class="row">
+			<div class="col-sm-12 col-lg-6">
+				<div class=" box orange">
+					<div class="card-body">
+						<h5 class="card-title">Ваши Результаты</h5>
+
+						<p class="card-text">Вы ответили:</p>
+						<div class="card-text" id="myanswers"></div>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-lg-6">
+				<div class=" box orange">
+					<div class="card-body">
+						<h5 class="card-title">Результаты соперника</h5>
+
+						<p class="card-text">Соперник ответил:</p>
+						<div class="card-text" id="oppanswers"></div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="divGame" style="clear:both">
+		<div class="text-center" id="answers">
+			<p id="numberquestion"></p>
+			<p id="timer"></p>
+			<div class="box orange col-sm-12 col-lg-6 mx-auto" style="height: 120px;">
+				<div class="card-body">
+					<h5 class="cardtext" id="word"></h5>
+
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col-sm-12 col-lg-6">
+					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 ">
+						<div class="cardshadow card  orange mb-3" style="">
+							<div class="card-body">
+								<h5 class="cardtext" id="answ1"></h5>
+
+
+							</div>
+						</div>
+					</button>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 ">
+						<div class="cardshadow card  orange mb-3" style="">
+							<div class="card-body">
+								<h5 class="cardtext" id="answ2"></h5>
+
+
+							</div>
+						</div>
+					</button>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 ">
+						<div class="cardshadow card  orange mb-3" style="">
+							<div class="card-body">
+								<h5 class="cardtext" id="answ3"></h5>
+
+
+
+							</div>
+						</div>
+					</button>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<button type="button" class="list-group-item list-group-item-action  px-3 border-0 ">
+						<div class="cardshadow card  orange mb-3" style="">
+							<div class="card-body">
+								<h5 class="cardtext" id="answ4"></h5>
+
+
+
+							</div>
+						</div>
+					</button>
+				</div>
+
+			</div>
+			<div class="box orange card-subtitle " hidden id="rightAnswer"></div>
+		</div>
+	</div>
+	<div id="wait">
+		<div class="col-sm-12 col-lg-6">
+						<div class="cardshadow card  orange mb-3" style="">
+							<div class="card-body">
+								<h5 class="cardtext" >Вы ответили на все вопросы, подождите соперника</h5>
+							</div>
+						</div>
+				</div>
+	</div>
 </form>
 
 
 @section Scripts {
 <script type="text/javascript">
-    $("#divFindOpponentPlayer").hide();
-    $("#divFindingOpponentPlayer").hide();
-    $("#divGame").hide();
-    $("#divGameInformation").hide();
-    $("#divPreviewImage").hide();
-     $('#divInfo').hide();
-    $("#divOpponentPlayer").hide();
-    let hubUrl = '/testgame';
-    const hubConnection = new signalR.HubConnectionBuilder()
-                    .withUrl(hubUrl)
-                    .configureLogging(signalR.LogLevel.Information)
-                    .build();
-    var playerName = ""; 
-    var answer;
-    var gameType=@ViewBag.Type;
-    var isStarted=false;
-    var question = 0;
-    var timer = 60;
-    hubConnection.start().then(() => {
-    playerName = "@(Model.Email)";
-    hubConnection.invoke('RegisterPlayer', playerName,gameType);
-  });
-    
+		$("#divFindOpponentPlayer").hide();
+		$("#divFindingOpponentPlayer").hide();
+		$("#divGame").hide();
+		$("#wait").hide();
+		$("#divGameInformation").hide();
+		$("#divPreviewImage").hide();
+		 $('#divInfo').hide();
+		$("#divOpponentPlayer").hide();
+		let hubUrl = '/testgame';
+		const hubConnection = new signalR.HubConnectionBuilder()
+						.withUrl(hubUrl)
+						.configureLogging(signalR.LogLevel.Information)
+						.build();
+		var playerName = "";
+		var answer;
+		var gameType=@ViewBag.Type;
+		var isStarted=false;
+		var question = 0;
+		var timer = 60;
+		hubConnection.start().then(() => {
+		playerName = "@(Model.Email)";
+		hubConnection.invoke('RegisterPlayer', playerName,gameType);
+	  });
 
 
 
 
-    hubConnection.on('registrationComplete', data => {
-        $("#divRegister").hide();
-        $('#divOpponentPlayer').hide();
-        $("#divFindOpponentPlayer").show();
-    });
+
+		hubConnection.on('registrationComplete', data => {
+			$("#divRegister").hide();
+			$('#divOpponentPlayer').hide();
+			$("#divFindOpponentPlayer").show();
+		});
 
 
 
-    hubConnection.on('opponentFound', (data) => {       
-        $('#divFindOpponentPlayer').hide();
-        $('#divFindingOpponentPlayer').hide();
-        $('#divGame').show();
-        $('#divGameInformation').show();
-        $('#divOpponentPlayer').show();
-        $('#divGameInfo').html("<br/><span><strong>" + playerName + "! Вы играете против <i>" + data + "</i></strong></span>");
-        
-    });
+		hubConnection.on('opponentFound', (data) => {
+			$('#divFindOpponentPlayer').hide();
+			$('#divFindingOpponentPlayer').hide();
+			$('#divCreateGame').hide();
+			$('#divGame').show();
+			$('#divGameInformation').show();
+			$('#divOpponentPlayer').show();
+			$('#divGameInfo').html("<br/><span><strong>" + playerName + "! Вы играете против <i>" + data + "</i></strong></span>");
 
-    hubConnection.on('opponentNotFound', data => {
-        $('#divFindOpponentPlayer').hide();
-        $('#divFindingOpponentPlayer').show();
-    });
+		});
 
-    hubConnection.on('opponentDisconnected', data => {
-        $("#divRegister").hide();
-        $('#divGame').hide();
-        $('#divGameInfo').html(" ");
-        $('#divInfo').html("<br/><span><strong>Hey " + playerName + "! Ваш оппонент отключился или покинул игру!</strong></span>");
+		hubConnection.on('opponentNotFound', data => {
+			$('#divFindOpponentPlayer').hide();
+			$('#divFindingOpponentPlayer').show();
+		});
 
-    });
-      hubConnection.on('answerresult', data => {
-       if(data){
-						answer.addClass("list-group-item-success");
-					}
-					else{
-						answer.addClass("list-group-item-danger");
-                    }
-                     setTimeout(function () {
+		hubConnection.on('opponentDisconnected', data => {
+			$("#divRegister").hide();
+			$('#divGame').hide();
+			$('#divGameInfo').html(" ");
+			$('#divInfo').html("<br/><span><strong>Hey " + playerName + "! Ваш оппонент отключился или покинул игру!</strong></span>");
 
-         hubConnection.invoke('NextQuestion');
-}, 1000);
-        
+		});
+		  hubConnection.on('answerresult', data => {
+		   if(data){
+							answer.addClass("list-group-item-success");
+						}
+						else{
+							answer.addClass("list-group-item-danger");
+						}
+						 setTimeout(function () {
 
-    });
-  
-    hubConnection.on('question',(data, answers) => {
-        if(isStarted){
-        answer.removeClass("list-group-item-danger");
-          answer.removeClass("list-group-item-success");
-        }
-        ++question;
-         $('#numberquestion').text("Вопрос "+question);
-         $('#word').text(data);
-         $('#answ1').text(answers[0]);
-         $('#answ2').text(answers[1]);
-         $('#answ3').text(answers[2]);
-         $('#answ4').text(answers[3]);
-         if(isStarted==false){
-             isStarted=true;
-             setInterval(function () {
-        $('#timer').text(--timer);
-    }, 1000);
-         setTimeout(function () {
-          hubConnection.invoke('EndGame');
-}, 60000);
-
-         }
-    });
-    $('button').on('click', function(){
-					answer = $(this);
-						  hubConnection.invoke('Answer', $(this).find('h5').text());
-
-						});
+			 hubConnection.invoke('NextQuestion');
+	}, 1000);
 
 
-    hubConnection.on('gameOver', (rightanswers,opponentrightanswers,winner) => {
-        $('#divGame').hide();
-        $('#gameresult').html("<br/><span><strong>"+winner+"</strong></span>");
-        for(var i=0;i<rightanswers.length;i++){
-            if(rightanswers[i].isRightAnswer){
-                $('#myanswers').append('<p class="card-text text-success">'+rightanswers[i].userAnswer+'</p>');
-            }else    $('#myanswers').append('<p class="card-text text-danger">'+rightanswers[i].userAnswer+'</p>');
-           
-        }
-        for(var i=0;i<opponentrightanswers.length;i++){
-             if(opponentrightanswers[i].isRightAnswer){
-           $('#oppanswers').append('<p class="card-text text-success">'+opponentrightanswers[i].userAnswer+'</p>');}
-           else $('#oppanswers').append('<p class="card-text text-danger">'+opponentrightanswers[i].userAnswer+'</p>');
-        }
-        $('#divGameBoard').html(" ");
-        $('#divGameInfo').html(" ");
-           $('#divInfo').show();
-        $('#divOpponentPlayer').hide();
-    });
+		});
+
+		hubConnection.on('question',(data, answers) => {
+			if(isStarted){
+			answer.removeClass("list-group-item-danger");
+			  answer.removeClass("list-group-item-success");
+			}
+			++question;
+			 $('#numberquestion').text("Вопрос "+question);
+			 $('#word').text(data);
+			 $('#answ1').text(answers[0]);
+			 $('#answ2').text(answers[1]);
+			 $('#answ3').text(answers[2]);
+			 $('#answ4').text(answers[3]);
+			 if(isStarted==false){
+				 isStarted=true;
+				 setInterval(function () {
+			$('#timer').text(--timer);
+		}, 1000);
+			 setTimeout(function () {
+			  hubConnection.invoke('EndGame');
+	}, 60000);
+
+			 }
+		});
+		$('button').on('click', function(){
+						answer = $(this);
+							  hubConnection.invoke('Answer', $(this).find('h5').text());
+
+							});
 
 
+		hubConnection.on('gameOver', (rightanswers,opponentrightanswers,winner) => {
+			$('#divGame').hide();
+			$('#gameresult').html("<br/><span><strong>"+winner+"</strong></span>");
+			for(var i=0;i<rightanswers.length;i++){
+				if(rightanswers[i].isRightAnswer){
+					$('#myanswers').append('<p class="card-text text-success">'+rightanswers[i].userAnswer+'</p>');
+				}else    $('#myanswers').append('<p class="card-text text-danger">'+rightanswers[i].userAnswer+'</p>');
 
-    $("#btnFindOpponentPlayer").click(function () {
-        hubConnection.invoke('FindOpponent');
-    });
+			}
+			for(var i=0;i<opponentrightanswers.length;i++){
+				 if(opponentrightanswers[i].isRightAnswer){
+			   $('#oppanswers').append('<p class="card-text text-success">'+opponentrightanswers[i].userAnswer+'</p>');}
+			   else $('#oppanswers').append('<p class="card-text text-danger">'+opponentrightanswers[i].userAnswer+'</p>');
+			}
+			$('#divGameBoard').html(" ");
+			$('#divGameInfo').html(" ");
+			   $('#divInfo').show();
+			$('#divOpponentPlayer').hide();
+		});
+
+		hubConnection.on('endwords', data => {
+			$('#divGame').hide();
+			$('#wait').show();
+		});
+
+		$("#btnFindOpponentPlayer").click(function () {
+			hubConnection.invoke('FindOpponent');
+		});
+
+			$("#btnCreateGame").click(function () {
+				console.log($("select").val());
+			hubConnection.invoke('CreateGame',$("select").val());
+		});
 
 
 </script>

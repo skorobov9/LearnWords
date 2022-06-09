@@ -4,9 +4,9 @@
 	<div class="progress-bar" role="progressbar" style="width: @(ViewBag.Number*10)%;" aria-valuenow="@(ViewBag.Number*10)" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div class="text-center" id="answers">
-	<div class="box orange w-50 h mx-auto" style="height: 120px;">
+	<div class="box orange  col-sm-12 col-lg-6 mx-auto" style="height: 120px;">
 		<div class="card-body">
-			<h5 class="card-title">@Model.Word.Meaning</h5>
+			<h5 class="cardtext">@Model.Word.Meaning</h5>
 
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 
 		@foreach (var item in Model.Answers)
 		{
-			<div class="col-6">
+			<div class="col-sm-12 col-lg-6">
 				<button type="button" class="list-group-item list-group-item-action  px-3 border-0 " id=@item>
 					<div class="cardshadow card  orange mb-3" style="">
 						<div class="card-body">
